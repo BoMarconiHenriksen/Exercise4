@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <!--CDN Polyfills which should allow you to use fetch/promises from IE and older browsers -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.min.js"></script>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" crossorigin="anonymous">
+               
+    </head>
+    <body>
+        <h1>Excercise 4</h1>
+
+        <div id="choice">
+            <div id="table">
+
+            </div>
+
+            <div>
+                
+                <p>Enter new user</p>
+                
+                    Enter Name <input id="name">
+                
+                    Enter Age <input id="age">
+                
+                    Enter Gender <input id="gender">
+                
+                    Enter Email <input id="email">
+
+                    <button id="newUser">Add new user</button>
+                    <br>
+                    <div id="added"></div>
+
+            </div>
+
+            <div>
+                <h3>Find a user</h3>
+                Enter ID <input id="enteredId">
+                
+                <button id="findUser">Find id</button>
+                
+                <div id="theUser"></div>
+            </div>
+
+            <div>
+                <h3>Delete an existing user</h3>
+                
+                Enter user id <input id="deleteIdUser">
+                <button id="deleteUser">Delete User</button>
+                
+                <div id="userDeleted"></div>
+            </div>
+
+            <div>
+                <h3>EDIT an existing user</h3>
+                <p>Der skal indtastets i alle felter ellers kommer der et tomt felt i json filen.</p>
+                
+                Enter user id <input id="userId">
+                <br>
+                New user Name <input id="newName">
+                <br>
+                New user Age <input id="ageChange">
+                <br>
+                New user Gender <input id="genderChange">
+                <br>
+                New user Email <input id="emailChange">
+                <br>
+                <button id="changeUSer">Change user</button>
+            </div>
+        </div>
+
+        <script src="js.js" type="text/javascript"></script>
+    </body>
+</html>
