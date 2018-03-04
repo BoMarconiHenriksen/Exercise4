@@ -1,4 +1,5 @@
 //OPG SHOW ALL USERS
+//"load" kalder metoden table når siden er hentet.
 document.addEventListener("load", table());
 
 //show users
@@ -47,10 +48,10 @@ document.getElementById("newUser").addEventListener("click", addUser);
 function addUser() {
 
     //Henter info fra input felterne
-    var name = document.getElementById("name").value;
-    var age = document.getElementById("age").value;
-    var gender = document.getElementById("gender").value;
-    var email = document.getElementById("email").value;
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let gender = document.getElementById("gender").value;
+    let email = document.getElementById("email").value;
 
     //clear the input fields
     document.getElementById("name").value = "";
@@ -85,11 +86,11 @@ function addUser() {
 document.getElementById("findUser").addEventListener("click", findSingleUser);
 
 function findSingleUser() {
-    var id = document.getElementById("enteredId").value;
+    let id = document.getElementById("enteredId").value;
 
-    var baseUrl = "http://localhost:3000/users/";
+    let baseUrl = "http://localhost:3000/users/";
 
-    var url = baseUrl + id;
+    let url = baseUrl + id;
 
     fetch(url)
             .then(response => {
@@ -99,7 +100,8 @@ function findSingleUser() {
                 throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
             })
             .then(data => { //nu er data klar
-
+        
+                //Udskriver brugeren
                 var user = "id: " + data.id + "<br>"
                         + "Name: " + data.name + "<br>"
                         + "Age: " + data.age + "<br>"
@@ -117,16 +119,16 @@ function findSingleUser() {
 document.getElementById("deleteUser").addEventListener("click", deleteUser);
 
 function deleteUser() {
-    var idDelete = document.getElementById("deleteIdUser").value;
+    let idDelete = document.getElementById("deleteIdUser").value;
 
     //clear the input fields
     document.getElementById("deleteIdUser").value = "";
 
-    var baseUrl = "http://localhost:3000/users/";
+    let baseUrl = "http://localhost:3000/users/";
 
-    var urlDelete = baseUrl + idDelete;
+    let urlDelete = baseUrl + idDelete;
 
-    var settings = {
+    let settings = {
         body: JSON.stringify(newUser), // must match 'Content-Type' header. Fra java object til json
         headers: {
             'content-type': 'application/json'
@@ -154,15 +156,15 @@ function deleteUser() {
 document.getElementById("changeUSer").onclick = changeUser;
 
 function changeUser() {
-    var idChangedUser = document.getElementById("userId").value;
-    var newName = document.getElementById("newName").value;
-    var ageChange = document.getElementById("ageChange").value;
-    var genderChange = document.getElementById("genderChange").value;
-    var emailChange = document.getElementById("emailChange").value;
+    let idChangedUser = document.getElementById("userId").value;
+    let newName = document.getElementById("newName").value;
+    let ageChange = document.getElementById("ageChange").value;
+    let genderChange = document.getElementById("genderChange").value;
+    let emailChange = document.getElementById("emailChange").value;
 
-    var baseUrlFor = "http://localhost:3000/users/";
+    let baseUrlFor = "http://localhost:3000/users/";
 
-    var urlChange = baseUrlFor + idChangedUser;
+    let urlChange = baseUrlFor + idChangedUser;
 
 
 
@@ -175,22 +177,37 @@ function changeUser() {
                 throw new Error("Noget gik galt med fetch metoden!" + response.status.text);
             })
             .then(data => { //nu er data klar
-                console.log(data.name);
-                
-                //Det her virker ikke
-                if (newName === undefined) {
-                    newName === data.name;
-                    console.log(newName);
+                                
+                //Hvis feltet er tomt indsættes det som står i json filen.
+                if(ageChange == undefined || ageChange === "") {
+                    ageChange = data.age;
                 }
-
-                var newUser = {
+        
+                //Hvis feltet er tomt indsættes det som står i json filen.
+                if (newName === undefined || newName === "") {
+                    console.log("If");
+                    newName = data.name;
+                }
+                
+                //Hvis feltet er tomt indsættes det som står i json filen.
+                if(genderChange == undefined || genderChange === "") {
+                    genderChange = data.gender;
+                }
+                
+                //Hvis feltet er tomt indsættes det som står i json filen.
+                if(emailChange == undefined || emailChange === "") {
+                    emailChange = data.email;
+                }
+                
+                //Hvis feltet er tomt indsættes det som står i json filen.
+                let newUser = {
                     age: ageChange,
                     name: newName,
                     gender: genderChange,
                     email: emailChange
                 }
 
-                var settings = {
+                let settings = {
                     body: JSON.stringify(newUser), // must match 'Content-Type' header. Fra java object til json
                     headers: {
                         'content-type': 'application/json'
@@ -201,6 +218,7 @@ function changeUser() {
                 fetch(urlChange, settings)
                         .then(res => res.json()) //ta json resopnse og send det videre
 //            .then(data => document.getElementById("name").innerText = data.name) //data er bare et navn
+
 
             })
             .catch(error => {
