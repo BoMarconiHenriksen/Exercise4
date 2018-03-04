@@ -185,7 +185,6 @@ function changeUser() {
         
                 //Hvis feltet er tomt indsættes det som står i json filen.
                 if (newName === undefined || newName === "") {
-                    console.log("If");
                     newName = data.name;
                 }
                 
